@@ -28,10 +28,19 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
-        return BigDecimal.ZERO;
+    	BigDecimal tax = BigDecimal.ZERO;
+    	for (Product product : this.products.keySet()) {
+    		tax = tax.add(product.getTaxPercent().multiply(product.getPrice()));
+    	}
+        return tax;
     }
 
     public BigDecimal getTotal() {
-        return BigDecimal.ZERO;
+    	BigDecimal total = BigDecimal.ZERO;
+    	for (Product product : this.products.keySet()) {
+    		Integer quantity = this.products.get(product);
+    		total = total.add(product.getPriceWithTax().multiply(new BigDecimal(quantity)));
+    	}
+    	return total;
     }
 }

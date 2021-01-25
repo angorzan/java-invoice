@@ -13,7 +13,10 @@ public class Invoice {
         products.put(product, 1);
     }
 
-    public void addProduct(Product product, Integer quantity) {
+    public void addProduct(Product product, Integer quantity) throws IllegalArgumentException {
+    	if (quantity <= 0) {
+    		throw new IllegalArgumentException();
+    	}
     	products.put(product, quantity);
     }
 
